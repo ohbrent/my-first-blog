@@ -12,6 +12,15 @@ from django.utils import timezone
 from blog.forms import PostForm 
 from .models import Post
 from django.shortcuts import render, get_object_or_404
+
+#added
+from rest_framework import viewsets
+from .serializers import PostSerializer
+class blogImage(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
 def post_list(request):
     posts = Post.objects.filter().order_by('published_date') 
     return render(request, 'blog/post_list.html', {'posts': posts})
